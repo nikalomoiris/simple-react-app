@@ -4,29 +4,29 @@ import Form from './Form';
 
 class App extends Component {
     state = {
-        characters: []
+        todos: []
     };
 
-    removeCharacter = (index) => {
-        const { characters } = this.state;
+    removeTodo = (index) => {
+        const { todos } = this.state;
 
         this.setState({
-            characters: characters.filter((character, i) => {
-                return i != index
+            todos: todos.filter((todo, i) => {
+                return i !== index
             })
         })
     };
 
-    handleSubmit = character => {
-        this.setState({characters: [...this.state.characters, character]})
+    handleSubmit = todo => {
+        this.setState({todos: [...this.state.todos, todo]})
     }
 
     render() {
-        const { characters } = this.state;
+        const { todos } = this.state;
 
         return (
             <div className="container">
-                <Table characterData={characters} removeCharacter={this.removeCharacter} />
+                <Table todosData={todos} removeTodo={this.removeTodo} />
                 <Form handleSubmit={this.handleSubmit} />
             </div>
         )

@@ -5,8 +5,7 @@ class Form extends Component {
         super(props);
 
         this.initialState = {
-            name: '',
-            job: ''
+            todo: ''
         }
 
         this.state = this.initialState;
@@ -27,21 +26,15 @@ class Form extends Component {
 
     render() {
 
-        const { name, job } = this.state;
+        const { todo } = this.state;
 
         return (
             <form>
-                <label>Name</label>
+                <label>To-Do</label>
                 <input
                     type="text"
-                    name="name"
-                    value={name}
-                    onChange={this.handleChange} />
-                <label>Job</label>
-                <input
-                    type="text"
-                    name="job"
-                    value={job}
+                    name="todo"
+                    value={todo}
                     onChange={this.handleChange} />
                 <input
                     type="button"
