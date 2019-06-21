@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import Table from './Table';
 import Form from './Form';
+import fire from './fire';
 
 class App extends Component {
     state = {
         todos: []
     };
+
+    componentWillMount() {
+        let todosRef = fire.database().ref('todos').orderByKey().limitToLast(100);
+        todosRef.on('child_added', snapshot => {
+            let todo = snapshot.val();
+            this.setState({ todos: [...this.state.todos, todo] });
+        })
+    }
 
     removeTodo = (index) => {
         const { todos } = this.state;
@@ -18,6 +27,7 @@ class App extends Component {
     };
 
     handleSubmit = todo => {
+        fire.database().ref('todos').push(todo);
         this.setState({todos: [...this.state.todos, todo]})
     }
 
