@@ -11,7 +11,10 @@ class App extends Component {
     componentWillMount() {
         let todosRef = fire.database().ref('todos').orderByKey().limitToLast(100);
         todosRef.on('child_added', snapshot => {
-            let todo = snapshot.val();
+            let todo = {
+                value: snapshot.val(),
+                key: snapshot.key
+            }
             this.setState({ todos: [...this.state.todos, todo] });
         })
     }
@@ -19,11 +22,14 @@ class App extends Component {
     removeTodo = (index) => {
         const { todos } = this.state;
 
-        this.setState({
-            todos: todos.filter((todo, i) => {
-                return i !== index
+        let todosRef = fire.database().ref('todos');
+        todosRef.child(todos[index].key).remove().then(
+            this.setState({
+                todos: todos.filter((todo, i) => {
+                    return i !== index
+                })
             })
-        })
+        );
     };
 
     handleSubmit = todo => {
@@ -37,7 +43,9 @@ class App extends Component {
         return (
             <div className="container">
                 <Form handleSubmit={this.handleSubmit} />
-                <Table todosData={todos} removeTodo={this.removeTodo} />
+                <Table todosData={todos.map(todo => {
+                    return todo.value;
+                })} removeTodo={this.removeTodo} />
             </div>
         )
     };
