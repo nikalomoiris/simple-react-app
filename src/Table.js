@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const TableHeader = () => {
     return (
@@ -14,9 +16,14 @@ const TableBody = (props) => {
     const rows = props.todosData.map((row, index) => {
         return (
             <tr id={index}>
-                <td>{row.todo}</td>
                 <td>
-                    <button onClick={() => props.removeTodo(index)}>Delete</button>
+                    <div>
+                        <div>{row.todo}</div>
+                        <Button variant="contained" color="secondary" onClick={() => props.removeTodo(index)}>
+                            Delete
+                            <DeleteIcon />
+                        </Button>
+                    </div>
                 </td>
             </tr>
         );
@@ -30,7 +37,6 @@ class Table extends Component {
         const { todosData, removeTodo } = this.props;
         return (
             <table>
-                <TableHeader />
                 <TableBody todosData={todosData} removeTodo={removeTodo} />
             </table>
         );

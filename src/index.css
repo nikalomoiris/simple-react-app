@@ -1,3 +1,14 @@
+td>div>div {
+  float: left;
+}
+
+td>div>Button {
+  float: right;
+}
+
+tr {
+  height: 100px;
+}
 /*! Primitive
  * A front end Sass boilerplate
  *

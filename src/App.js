@@ -36,8 +36,8 @@ class App extends Component {
 
         return (
             <div className="container">
-                <Table todosData={todos} removeTodo={this.removeTodo} />
                 <Form handleSubmit={this.handleSubmit} />
+                <Table todosData={todos} removeTodo={this.removeTodo} />
             </div>
         )
     };

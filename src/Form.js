@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from '@material-ui/core/Button'
 
 class Form extends Component {
     constructor(props) {
@@ -30,16 +31,17 @@ class Form extends Component {
 
         return (
             <form>
-                <label>To-Do</label>
+                <label>New ToDo</label>
                 <input
                     type="text"
                     name="todo"
                     value={todo}
                     onChange={this.handleChange} />
-                <input
-                    type="button"
+                <Button
+                    variant="contained"
+                    color="primary"
                     value="Submit"
-                    onClick={this.submitForm} />
+                    onClick={this.submitForm}>Add</Button>
             </form>
         );
     }
