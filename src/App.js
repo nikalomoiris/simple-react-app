@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Table from './Table';
 import Form from './Form';
 import fire from './fire';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 class App extends Component {
     state = {
@@ -41,12 +43,14 @@ class App extends Component {
         const { todos } = this.state;
 
         return (
-            <div className="container">
-                <Form handleSubmit={this.handleSubmit} />
-                <Table todosData={todos.map(todo => {
-                    return todo.value;
-                })} removeTodo={this.removeTodo} />
-            </div>
+            <Card>
+                <CardContent>
+                    <Form handleSubmit={this.handleSubmit} />
+                    <Table todosData={todos.map(todo => {
+                        return todo.value;
+                    })} removeTodo={this.removeTodo} />
+                </CardContent>
+            </Card>
         )
     };
 }
